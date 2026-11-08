@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
 import cultureApi from "../api/cultureApi";
+import CatalogList from "./CatalogList";
+import ItemCard from "../components/ItemCard";
+
+const fetcher = () => cultureApi.getAll();
+const searchFields = (a) => [a.title, a.content];
 
 export default function Culture() {
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    cultureApi.getAll().then((res) => setArticles(res.data));
-  }, []);
-
   return (
-    <div>
-      <h1>Văn hóa Đắk Lắk</h1>
-
-      {articles.map((a) => (
-        <div key={a.articleId} style={{ border: "1px solid #ddd", margin: 12, padding: 12 }}>
-          <h3>{a.title}</h3>
-          <p>{a.content}</p>
-          <p>Chủ đề: {a.category?.categoryName}</p>
-        </div>
-      ))}
-    </div>
+    <CatalogList
+      title="Văn hóa Đắk Lắk"
+      subtitle="Lễ hội, cồng chiêng, nhà dài, ẩm thực và đời sống các dân tộc Tây Nguyên"
+      fetcher={fetcher}
+      searchFields={searchFields}
+      renderItem={(a) => (
+        <ItemCard key={a.articleId} to={`/culture/${a.articleId}`} image={a.imageUrl} icon="🥁" title={a.title} text={a.content}>
+          {a.category?.categoryName && <span className="badge">{a.category.categoryName}</span>}
+        </ItemCard>
+      )}
+    />
   );
 }

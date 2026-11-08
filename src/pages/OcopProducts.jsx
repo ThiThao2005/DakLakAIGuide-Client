@@ -1,26 +1,31 @@
-import { useEffect, useState } from "react";
 import ocopApi from "../api/ocopApi";
+import CatalogList from "./CatalogList";
+import ItemCard from "../components/ItemCard";
+import { formatPrice, stars } from "../utils/format";
+
+const fetcher = () => ocopApi.getAll();
+const searchFields = (p) => [p.name, p.description, p.producer, p.address];
+const starFilter = {
+  label: "Tất cả hạng sao",
+  options: [5, 4, 3].map((n) => ({ value: String(n), label: `${n} sao` })),
+  test: (p, v) => String(p.ocopLevel) === v,
+};
 
 export default function OcopProducts() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    ocopApi.getAll().then((res) => setProducts(res.data));
-  }, []);
-
   return (
-    <div>
-      <h1>Sản phẩm OCOP Đắk Lắk</h1>
-
-      {products.map((p) => (
-        <div key={p.productId} style={{ border: "1px solid #ddd", margin: 12, padding: 12 }}>
-          <h3>{p.name}</h3>
-          <p>{p.description}</p>
-          <p>Nhà sản xuất: {p.producer}</p>
-          <p>OCOP: {p.ocopLevel} sao</p>
-          <p>Giá: {p.price?.toLocaleString()}đ</p>
-        </div>
-      ))}
-    </div>
+    <CatalogList
+      title="Sản phẩm OCOP Đắk Lắk"
+      subtitle="Cà phê, ca cao, mật ong, hồ tiêu và các đặc sản đạt chuẩn OCOP"
+      fetcher={fetcher}
+      searchFields={searchFields}
+      extraFilter={starFilter}
+      renderItem={(p) => (
+        <ItemCard key={p.productId} to={`/ocop/${p.productId}`} image={p.imageUrl} icon="☕" title={p.name} text={p.description}>
+          {p.ocopLevel && <span className="badge badge-accent stars">{stars(p.ocopLevel)}</span>}
+          {formatPrice(p.price) && <span className="badge badge-green">{formatPrice(p.price)}</span>}
+          {p.category?.categoryName && <span className="badge">{p.category.categoryName}</span>}
+        </ItemCard>
+      )}
+    />
   );
 }

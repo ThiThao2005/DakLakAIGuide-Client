@@ -1,17 +1,23 @@
 {
+  "name": "daklak-ai-guide-client",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vitejs/plugin-react": "latest",
     "axios": "^1.18.0",
     "leaflet": "^1.9.4",
-    "react": "latest",
-    "react-dom": "latest",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-leaflet": "^5.0.0",
-    "react-router-dom": "^7.18.0",
-    "vite": "latest"
+    "react-router-dom": "^7.18.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "vite": "^8.0.16"
   }
 }
