@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Hình thoi (ý từ thổ cẩm) bao quanh đồi núi, mặt trời và hạt cà phê -->
+  <path d="M32 1 L63 32 L32 63 L1 32 Z" fill="#1d3527"/>
+  <path d="M32 5 L59 32 L32 59 L5 32 Z" fill="none" stroke="#dcb65e" stroke-width="2"/>
+  <clipPath id="c"><path d="M32 9 L55 32 L32 55 L9 32 Z"/></clipPath>
+  <g clip-path="url(#c)">
+    <rect x="0" y="0" width="64" height="64" fill="#2f5d3a"/>
+    <circle cx="39" cy="24" r="6" fill="#dcb65e"/>
+    <path d="M6 44 L22 28 L31 37 L40 29 L58 44 L58 60 L6 60 Z" fill="#6f9a52"/>
+    <path d="M6 50 Q32 40 58 50 L58 60 L6 60 Z" fill="#b25a33"/>
+  </g>
+  <ellipse cx="25" cy="44" rx="4.2" ry="6" transform="rotate(-25 25 44)" fill="#f4f1e8"/>
+  <path d="M22.5 49 Q25.5 44 26.5 39" stroke="#b25a33" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+</svg>
